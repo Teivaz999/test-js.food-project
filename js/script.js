@@ -323,7 +323,24 @@ total = document.querySelector('#total'),
 current = document.querySelector('#current');
 
 showSlides(sliderIndex);
+if(sliderIndex < 10){
+    total.textContent = `0${slides.length}`;
+} else {
+    total.textContent = slides.length;
+
+}
+if(sliderIndex > slides.length) {
+    sliderIndex = 1;
+}
+
 function showSlides(n) {
+
+    if(sliderIndex < 10){
+        current.textContent = `0${sliderIndex}`;
+    } else {
+        current.textContent = sliderIndex;
+    }
+
     if(n > slides.length) {
         sliderIndex = 1;
     }
@@ -336,7 +353,7 @@ function showSlides(n) {
 }
 
 function plusSlides(n){
-    sliderIndex + n;
+    showSlides(sliderIndex + n);
 }
 
 prev.addEventListener('click', () =>{
