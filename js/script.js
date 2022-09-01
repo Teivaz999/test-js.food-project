@@ -323,23 +323,14 @@ total = document.querySelector('#total'),
 current = document.querySelector('#current');
 
 showSlides(sliderIndex);
-if(sliderIndex < 10){
+
+if(slides.length < 10){
     total.textContent = `0${slides.length}`;
 } else {
     total.textContent = slides.length;
-
-}
-if(sliderIndex > slides.length) {
-    sliderIndex = 1;
 }
 
 function showSlides(n) {
-
-    if(sliderIndex < 10){
-        current.textContent = `0${sliderIndex}`;
-    } else {
-        current.textContent = sliderIndex;
-    }
 
     if(n > slides.length) {
         sliderIndex = 1;
@@ -349,19 +340,26 @@ function showSlides(n) {
     }
 
     slides.forEach(item => item.style.display = "none");
-    slides[n - 1].style.display = "";
+    slides[n - 1].style.display = "block";
+
+    if(n < 10){
+        current.textContent = `0${sliderIndex}`;
+    } 
+    if(n > 10) {
+        current.textContent = sliderIndex;
+    }
 }
 
 function plusSlides(n){
-    showSlides(sliderIndex + n);
+    showSlides(sliderIndex += n);
 }
 
 prev.addEventListener('click', () =>{
     plusSlides(-1);
     console.log(sliderIndex);
-})
+});
 next.addEventListener('click', () =>{
     plusSlides(1);
     console.log(sliderIndex);
-})
+});
 });
