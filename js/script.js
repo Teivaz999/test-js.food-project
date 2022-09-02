@@ -40,7 +40,7 @@ window.addEventListener('DOMContentLoaded', ()=> {
 
       //------------------
 
-      const deadline = '2022-5-5';
+      const deadline = '2022-12-08';
 
       function getTimeRemaining(endtime){
           const t = Date.parse(endtime) - Date.parse(new Date()),
@@ -72,8 +72,9 @@ window.addEventListener('DOMContentLoaded', ()=> {
           hours = timer.querySelector('#hours'),
           minutes = timer.querySelector('#minutes'),
           seconds = timer.querySelector('#seconds'),
+          actionTime = timer.querySelector('#actionTime'),
           timeInterval = setInterval(updateClock, 1000);
-            
+          
           updateClock();
 
           function updateClock(){
@@ -83,14 +84,14 @@ window.addEventListener('DOMContentLoaded', ()=> {
               hours.innerHTML = getZero(t.hours);
               minutes.innerHTML = getZero(t.minutes);
               seconds.innerHTML = getZero(t.seconds);
-
+              actionTime.innerHTML = deadline;
               if(t.total <= 0) {
                   clearInterval(timeInterval);
               }
           }
       }
 
-      setClock('.timer', deadline);
+      setClock('.promotion', deadline);
 
       //------------------
 
@@ -340,7 +341,7 @@ function showSlides(n) {
     }
 
     slides.forEach(item => item.style.display = "none");
-    slides[n - 1].style.display = "block";
+    slides[sliderIndex - 1].style.display = "block";
 
     if(n < 10){
         current.textContent = `0${sliderIndex}`;
