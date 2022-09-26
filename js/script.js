@@ -102,7 +102,7 @@ window.addEventListener('DOMContentLoaded', ()=> {
         modal.classList.add('show');
         modal.classList.remove('hide');
         document.body.style.overflow = 'hidden';
-        clearInterval(modalTimerId); 
+        clearInterval(modalTimerId);
       }
 
       function closeModal() {
@@ -317,6 +317,8 @@ fetch('http://localhost:3000/menu')
     .then(res => console.log(res[0].img));
 
 const slides = document.querySelectorAll('.offer__slide'),
+dots = document.createElement('ol'),
+mainSlider = document.querySelector('.offer__slider'),
 prev = document.querySelector('.offer__slider-prev'),
 next = document.querySelector('.offer__slider-next');
 let sliderIndex = 1,
@@ -326,6 +328,44 @@ inner = document.querySelector('.offer__slider-inner'),
 width = window.getComputedStyle(wrapper).width,
 total = document.querySelector('#total'),
 current = document.querySelector('#current');
+
+mainSlider.style.position = "relative";
+dots.classList.add('.carousel-indicators');
+dots.style.cssText = `
+position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+    display: flex;
+    justify-content: center;
+    margin-right: 15%;
+    margin-left: 15%;
+    list-style: none;
+`;
+
+mainSlider.append(dots);
+
+for(let i = 0; i < slides.length; i++){
+    const dot = document.createElement('li');
+    dot.setAttribute('data-slide-to', i + 1);
+    dot.style.cssText = `
+        box-sizing: content-box;
+        flex: 0 1 auto;
+        width: 30px;
+        height: 6px;
+        margin-right: 3px;
+        margin-left: 3px;
+        cursor: pointer;
+        background-color: #fff;
+        background-clip: padding-box;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        opacity: .5;
+        transition: opacity .6s ease;
+    `;
+    dots.append(dot);
+}
 
 if(slides.length < 10) {
     total.textContent = `0${slides.length}`;
@@ -428,3 +468,4 @@ next.addEventListener('click', () =>{
     console.log(sliderIndex);
 }); */
 });
+
