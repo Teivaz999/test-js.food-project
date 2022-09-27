@@ -318,6 +318,7 @@ fetch('http://localhost:3000/menu')
 
 const slides = document.querySelectorAll('.offer__slide'),
 dots = document.createElement('ol'),
+dotsAr=[],
 mainSlider = document.querySelector('.offer__slider'),
 prev = document.querySelector('.offer__slider-prev'),
 next = document.querySelector('.offer__slider-next');
@@ -364,8 +365,14 @@ for(let i = 0; i < slides.length; i++){
         opacity: .5;
         transition: opacity .6s ease;
     `;
+    if(i == 0){
+        dot.style.opacity = 1;
+    }
     dots.append(dot);
+    dotsAr.push(dot);
 }
+
+
 
 if(slides.length < 10) {
     total.textContent = `0${slides.length}`;
@@ -397,12 +404,16 @@ next.addEventListener('click', () => {
         } else {
             sliderIndex++;
         }
+        
 
         if(slides.length < 10){
             current.textContent = `0${sliderIndex}`;
         } else {
             current.textContent = sliderIndex;
         }
+
+        dotsAr.forEach(dot => dot.style.opacity = '.5');
+        dotsAr[sliderIndex - 1].style.opacity = 1;
 });
 
 prev.addEventListener('click', () => {
@@ -424,6 +435,28 @@ prev.addEventListener('click', () => {
         } else {
             current.textContent = sliderIndex;
         }
+
+        dotsAr.forEach(dot => dot.style.opacity = '.5');
+        dotsAr[sliderIndex - 1].style.opacity = 1;
+});
+
+dotsAr.forEach(dot => {
+    dot.addEventListener('click', (e) =>{
+        const slideTo = e.target.getAttribute('data-slide-to');
+
+        sliderIndex = slideTo;
+        offset = +width.slice(0, width.length-2) * (slideTo - 1);
+        inner.style.transform = `translateX(-${offset}px)`;
+
+        if(slides.length < 10){
+            current.textContent = `0${sliderIndex}`;
+        } else {
+            current.textContent = sliderIndex;
+        }
+
+        dotsAr.forEach(dot => dot.style.opacity = '.5');
+        dotsAr[sliderIndex - 1].style.opacity = 1;
+    });
 });
 
 
