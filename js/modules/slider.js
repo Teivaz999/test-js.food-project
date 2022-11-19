@@ -1,17 +1,17 @@
-function slider(){
-    const slides = document.querySelectorAll('.offer__slide'),
+function slider({container, slide, nextArrow, prevArrow, totalCounter, currentCounter, slidesWrapper, field}){
+    const slides = document.querySelectorAll(slide),
 dots = document.createElement('ol'),
 dotsAr=[],
-mainSlider = document.querySelector('.offer__slider'),
-prev = document.querySelector('.offer__slider-prev'),
-next = document.querySelector('.offer__slider-next');
+mainSlider = document.querySelector(container),
+prev = document.querySelector(prevArrow),
+next = document.querySelector(nextArrow);
 let sliderIndex = 1,
 offset = 0,
-wrapper = document.querySelector('.offer__slider-wrapper'),
-inner = document.querySelector('.offer__slider-inner'),
+wrapper = document.querySelector(slidesWrapper),
+inner = document.querySelector(field),
 width = window.getComputedStyle(wrapper).width,
-total = document.querySelector('#total'),
-current = document.querySelector('#current');
+total = document.querySelector(totalCounter),
+current = document.querySelector(currentCounter);
 
 mainSlider.style.position = "relative";
 dots.classList.add('.carousel-indicators');

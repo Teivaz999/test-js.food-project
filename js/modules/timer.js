@@ -1,5 +1,4 @@
-function timer(){
-    const deadline = '2022-12-08';
+function timer(id, deadline){
 
       function getTimeRemaining(endtime){
           const t = Date.parse(endtime) - Date.parse(new Date()),
@@ -50,7 +49,7 @@ function timer(){
           }
       }
 
-      setClock('.promotion', deadline);
+      setClock(id, deadline);
 }
 
 export default timer;
